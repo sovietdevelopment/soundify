@@ -2,148 +2,150 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Soundify • Spotify Music Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soundify • Spotify Connect Player</title>
 <style>
-:root{--green:#1ed760;--bg:#080b0a;--panel:#121715;--panel2:#1a211e;--muted:#9aa69f;--white:#f5f8f6}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#101a14,#080b0a 45%);color:var(--white);font-family:Inter,Arial,sans-serif;min-height:100vh}
-header{height:76px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12;background:#080b0ad9;position:sticky;top:0;z-index:5;backdrop-filter:blur(16px)}
+:root{--green:#1ed760;--bg:#080b0a;--panel:#121715;--panel2:#1b2420;--muted:#9aa69f;--white:#f5f8f6}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#183022 0,transparent 40%),var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif;min-height:100vh}
+header{height:74px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12;background:#080b0ad9;position:sticky;top:0;z-index:4;backdrop-filter:blur(16px)}
 .brand{font-size:23px;font-weight:900;letter-spacing:-1px}.brand span{color:var(--green)}.status{font-size:12px;color:var(--muted)}
-main{max-width:1150px;margin:0 auto;padding:46px 24px 150px}.hero{margin-bottom:32px}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
-h1{font-size:clamp(36px,6vw,62px);letter-spacing:-3px;line-height:1.02;margin:12px 0}.hero p{color:var(--muted);font-size:15px}
-.searchbar{display:flex;gap:10px;background:var(--panel);border:1px solid #ffffff14;padding:9px;border-radius:16px;max-width:780px}
-input{min-width:0;flex:1;background:transparent;border:0;outline:0;color:white;padding:12px;font-size:16px}
-button{border:0;border-radius:12px;padding:12px 19px;background:var(--green);color:#071109;font-weight:800;cursor:pointer;transition:.2s}
-button:hover{filter:brightness(1.1);transform:translateY(-1px)}button.secondary{background:var(--panel2);color:white;border:1px solid #ffffff18}
-.setup{margin:22px 0 30px;padding:17px;background:#121715;border:1px solid #ffffff12;border-radius:16px;max-width:780px}
-.setup summary{cursor:pointer;font-weight:750}.setup p,.setup small{color:var(--muted);line-height:1.55}.setup input{width:100%;background:#080b0a;border:1px solid #ffffff20;border-radius:9px;margin:10px 0}
-.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:36px 0 16px}.sectionhead h2{font-size:20px;margin:0}.sectionhead span{font-size:12px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:16px}
-.track{background:var(--panel);padding:13px;border-radius:14px;border:1px solid #ffffff0b;cursor:pointer;transition:.2s;min-width:0}
-.track:hover{background:#202923;transform:translateY(-3px)}
-.cover{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;background:#222}
-.track h3{font-size:14px;margin:12px 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track p{font-size:12px;color:var(--muted);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.track .actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px}.play{width:35px;height:35px;border-radius:50%;padding:0;font-size:15px}.heart{background:transparent;color:#c3cec7;padding:6px;font-size:19px}.heart.saved{color:var(--green)}
-#message{color:var(--muted);padding:25px 0}.player{position:fixed;bottom:0;left:0;right:0;background:#101512ed;border-top:1px solid #ffffff18;padding:12px 5vw;z-index:10;backdrop-filter:blur(20px)}
-.playerinner{max-width:1150px;margin:auto;display:grid;grid-template-columns:1fr minmax(280px,500px);gap:18px;align-items:center}
-.now{display:flex;align-items:center;gap:12px;min-width:0}.now img{width:48px;height:48px;border-radius:7px;object-fit:cover}.now strong,.now span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now span{color:var(--muted);font-size:12px;margin-top:4px}
-iframe{width:100%;height:80px;border:0;border-radius:12px}
-a{color:var(--green)}.empty{border:1px dashed #ffffff25;border-radius:14px;padding:25px;color:var(--muted);grid-column:1/-1}
-@media(max-width:650px){header{padding:0 18px}main{padding:32px 17px 180px}.searchbar{flex-direction:column}.searchbar button{width:100%}.playerinner{grid-template-columns:1fr}.player{padding:9px 14px}.player iframe{height:80px}.status{display:none}}
+main{max-width:1050px;margin:auto;padding:48px 24px 70px}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(38px,6vw,64px);letter-spacing:-3px;line-height:1.02;margin:12px 0}.sub{color:var(--muted);line-height:1.6;max-width:680px}
+.panel{background:linear-gradient(145deg,#17211b,#101512);border:1px solid #ffffff14;border-radius:20px;padding:22px;margin-top:25px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.row>*{flex:1}
+input{min-width:0;background:#080d0a;border:1px solid #ffffff20;border-radius:11px;color:white;padding:14px;font-size:15px;width:100%;outline:none}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--green);color:#071109;font-weight:800;cursor:pointer}button.secondary{background:var(--panel2);border:1px solid #ffffff20;color:white}button:disabled{opacity:.4;cursor:not-allowed}
+h2{font-size:20px;margin:0 0 14px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.device{display:flex;align-items:center;gap:15px}.disc{width:62px;height:62px;border-radius:50%;background:conic-gradient(#1ed760,#0c6130,#1ed760);display:grid;place-items:center;font-size:25px;flex:none;box-shadow:0 0 30px #1ed76022}
+.now{display:flex;gap:16px;align-items:center;margin-top:20px}.cover{width:88px;height:88px;object-fit:cover;border-radius:12px;background:#26322b}.tracktitle{font-weight:800;font-size:17px}.artist{color:var(--muted);margin-top:6px;font-size:13px}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:20px}.controls button{min-width:55px}.volume{display:flex;align-items:center;gap:10px;max-width:250px;color:var(--muted);font-size:12px}.volume input{padding:0;accent-color:var(--green)}
+details{margin-top:20px}summary{cursor:pointer;font-weight:750}details p{color:var(--muted);font-size:13px;line-height:1.6}
+a{color:var(--green)}.notice{padding:13px 15px;background:#1b2b20;border:1px solid #1ed76035;border-radius:12px;color:#c8f5d6;font-size:13px;line-height:1.6;margin-top:16px}
+#log{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:600px){header{padding:0 17px}main{padding:32px 17px}.row{flex-direction:column;align-items:stretch}.device{align-items:flex-start}.status{max-width:130px;text-align:right}}
 </style>
 </head>
 <body>
-<header><div class="brand">sound<span>ify</span> ✦</div><div class="status" id="status">Not connected to Spotify</div></header>
+<header><div class="brand">sound<span>ify</span> ✦</div><div class="status" id="status">Not connected</div></header>
 <main>
-  <section class="hero">
-    <div class="eyebrow">Your music, your way</div>
-    <h1>Find your<br><span style="color:var(--green)">next obsession.</span></h1>
-    <p>Search Spotify's catalogue and play tracks using the official Spotify player.</p>
-  </section>
-  <div class="searchbar"><input id="query" placeholder="What do you want to listen to?" autocomplete="off"><button id="searchBtn">Search tracks ↗</button></div>
-  <details class="setup" open id="setup">
-    <summary>⚙ Spotify connection setup</summary>
-    <p>To search Spotify, create an app in the <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noreferrer">Spotify Developer Dashboard</a>, then paste its Client ID below. Add this exact redirect URI in your app settings:</p>
-    <input id="clientId" placeholder="Paste your Spotify Client ID">
-    <small id="redirectText"></small><br><br>
-    <button id="connectBtn">Connect Spotify</button>
-    <p><small>This uses Spotify OAuth Authorization Code with PKCE. No client secret is needed. Spotify developer-mode account and user restrictions may apply.</small></p>
+ <div class="eyebrow">Spotify Connect • Web Playback SDK</div>
+ <h1>Your browser.<br><span style="color:var(--green)">Your player.</span></h1>
+ <p class="sub">Connect Soundify as a Spotify Connect device, then control playback from this page. This version uses Spotify's official Web Playback SDK.</p>
+
+ <section class="panel">
+  <h2>1. Connect your Spotify app</h2>
+  <p class="muted">Paste your Spotify app's Client ID. No Client Secret belongs in this page.</p>
+  <div class="row"><input id="clientId" placeholder="Spotify Client ID" autocomplete="off"><button id="connect">Connect Spotify</button></div>
+  <p class="muted" id="redirect"></p>
+  <details><summary>Spotify Developer Dashboard setup</summary>
+   <p>In your Spotify app settings, select <b>Web Playback SDK</b> and add this exact Redirect URI. Save the app settings, then reload this page.</p>
+   <p><b>Redirect URI:</b> <code id="redirectCode"></code></p>
+   <p>Authorization uses PKCE in the browser. The requested scopes are <code>streaming</code>, <code>user-read-email</code> and <code>user-read-private</code>.</p>
   </details>
-  <div class="sectionhead"><h2 id="resultTitle">Discover</h2><span id="resultCount"></span></div>
-  <div class="grid" id="results"><div class="empty">Connect Spotify above, then search for any track, artist or album.</div></div>
-  <div class="sectionhead"><h2>Your saved tracks</h2><span>Stored on this device</span></div>
-  <div class="grid" id="favorites"><div class="empty">Tap the ♡ on a track to save it here.</div></div>
+ </section>
+
+ <section class="panel">
+  <h2>2. Soundify player</h2>
+  <div class="device">
+   <div class="disc">♫</div>
+   <div><div class="tracktitle" id="deviceTitle">Waiting for Spotify…</div><div class="artist" id="deviceText">Connect your account to create this browser device.</div></div>
+  </div>
+  <div class="notice" id="instructions">After the player connects, open the Spotify app on your phone or computer. Open its device picker and choose <b>Soundify Web Player</b>. Start a song in Spotify and it will play through this browser.</div>
+  <div class="now">
+   <img class="cover" id="cover" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%2326322b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='35' fill='%231ed760'%3E♫%3C/text%3E%3C/svg%3E">
+   <div><div class="tracktitle" id="track">Nothing playing</div><div class="artist" id="artist">Transfer playback to Soundify from Spotify.</div></div>
+  </div>
+  <div class="controls">
+   <button class="secondary" id="previous" disabled>⏮</button>
+   <button id="toggle" disabled>▶ Play / Pause</button>
+   <button class="secondary" id="next" disabled>⏭</button>
+   <button class="secondary" id="disconnect" disabled>Disconnect</button>
+   <label class="volume">Volume <input id="volume" type="range" min="0" max="100" value="50" disabled></label>
+  </div>
+  <p class="muted" id="log">Player has not started.</p>
+ </section>
+
+ <p class="muted">Important: the Web Playback SDK creates a Spotify Connect device; it does not provide catalogue search by itself. This SDK-only build controls playback after you start or transfer music from an official Spotify app. Spotify's SDK requires a Premium account for actual streaming.</p>
 </main>
-<div class="player">
- <div class="playerinner">
-  <div class="now"><img id="nowCover" src="" alt="" style="display:none"><div><strong id="nowTitle">Nothing playing yet</strong><span id="nowArtist">Choose a track to start listening</span></div></div>
-  <iframe id="spotifyPlayer" title="Spotify player" src="about:blank" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
- </div>
-</div>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script>
 const $=id=>document.getElementById(id);
-let token=localStorage.getItem('sf_token')||'';
-let favorites=JSON.parse(localStorage.getItem('sf_favorites')||'[]');
 const redirectUri=location.origin+location.pathname;
-$('redirectText').textContent='Redirect URI: '+redirectUri;
+$('redirect').textContent='Current page redirect URI: '+redirectUri;
+$('redirectCode').textContent=redirectUri;
 $('clientId').value=localStorage.getItem('sf_client_id')||'';
+let player=null,deviceId=null,accessToken='',refreshTimer=null;
 
-function setStatus(text){$('status').textContent=text}
-function base64url(bytes){return btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
-async function sha256(text){return await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))}
-async function connect(){
+function log(message){$('log').textContent=message}
+function setStatus(message){$('status').textContent=message}
+function b64url(bytes){return btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+async function digest(value){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))}
+function randomString(n=64){return b64url(crypto.getRandomValues(new Uint8Array(n)))}
+
+async function beginLogin(){
  const clientId=$('clientId').value.trim();
  if(!clientId){alert('Paste your Spotify Client ID first.');return}
  localStorage.setItem('sf_client_id',clientId);
- const verifier=base64url(crypto.getRandomValues(new Uint8Array(64)));
- localStorage.setItem('sf_verifier',verifier);
- const challenge=base64url(await sha256(verifier));
- const params=new URLSearchParams({client_id:clientId,response_type:'code',redirect_uri:redirectUri,code_challenge_method:'S256',code_challenge:challenge});
+ const verifier=randomString(64),state=randomString(16);
+ localStorage.setItem('sf_verifier',verifier);localStorage.setItem('sf_state',state);
+ const challenge=b64url(await digest(verifier));
+ const params=new URLSearchParams({
+  response_type:'code',client_id:clientId,scope:'streaming user-read-email user-read-private',
+  redirect_uri:redirectUri,code_challenge_method:'S256',code_challenge:challenge,state
+ });
  location.href='https://accounts.spotify.com/authorize?'+params.toString();
 }
-async function handleCallback(){
+async function exchangeCode(){
  const params=new URLSearchParams(location.search),code=params.get('code');
+ if(params.get('error')){log('Spotify authorization error: '+params.get('error'));history.replaceState({},'',redirectUri);return}
  if(!code)return;
- const verifier=localStorage.getItem('sf_verifier'),clientId=localStorage.getItem('sf_client_id');
- if(!verifier||!clientId)return;
+ const state=params.get('state'),savedState=localStorage.getItem('sf_state');
+ if(!state||state!==savedState){log('Login state check failed. Please connect again.');history.replaceState({},'',redirectUri);return}
+ const body=new URLSearchParams({
+  client_id:localStorage.getItem('sf_client_id')||'',
+  grant_type:'authorization_code',code,redirect_uri:redirectUri,
+  code_verifier:localStorage.getItem('sf_verifier')||''
+ });
  try{
-  const body=new URLSearchParams({client_id:clientId,grant_type:'authorization_code',code,redirect_uri:redirectUri,code_verifier:verifier});
-  const r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
-  const data=await r.json();if(!r.ok)throw new Error(data.error_description||data.error||'Token exchange failed');
-  token=data.access_token;localStorage.setItem('sf_token',token);
-  history.replaceState({},'',redirectUri);setStatus('Connected to Spotify ✓');$('setup').open=false;
- }catch(e){alert('Spotify connection failed: '+e.message)}
+  const response=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
+  const data=await response.json();if(!response.ok)throw new Error(data.error_description||data.error||'Token exchange failed');
+  accessToken=data.access_token;sessionStorage.setItem('sf_access_token',accessToken);
+  history.replaceState({},'',redirectUri);startPlayer();
+ }catch(error){log('Token exchange failed: '+error.message)}
 }
-async function search(){
- const q=$('query').value.trim();if(!q)return;
- if(!token){$('message').textContent='Connect Spotify first using the setup panel.';return}
- $('resultTitle').textContent='Search results';$('results').innerHTML='<div class="empty">Searching Spotify…</div>';
- try{
-  const r=await fetch('https://api.spotify.com/v1/search?'+new URLSearchParams({q,type:'track',limit:'24'}),{headers:{Authorization:'Bearer '+token}});
-  if(r.status===401){token='';localStorage.removeItem('sf_token');setStatus('Session expired. Reconnect Spotify.');throw new Error('Your Spotify session expired. Reconnect above.')}
-  const data=await r.json();if(!r.ok)throw new Error(data.error?.message||'Search failed');
-  renderTracks(data.tracks.items,'results');$('resultCount').textContent=data.tracks.items.length+' tracks';
- }catch(e){$('results').innerHTML='<div class="empty">'+escapeHtml(e.message)+'</div>'}
+function tokenForSdk(callback){callback(accessToken)}
+function enableControls(enabled){
+ ['toggle','previous','next','disconnect','volume'].forEach(id=>$(id).disabled=!enabled);
 }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function trackCard(t){
- const img=t.album.images?.[0]?.url||'';
- const artists=t.artists.map(a=>a.name).join(', ');
- const saved=favorites.some(x=>x.id===t.id);
- return `<article class="track" data-id="${t.id}">
- <img class="cover" src="${img}" alt="">
- <h3 title="${escapeHtml(t.name)}">${escapeHtml(t.name)}</h3><p>${escapeHtml(artists)}</p>
- <div class="actions"><button class="play" data-play="${t.id}" title="Play">▶</button><button class="heart ${saved?'saved':''}" data-save="${t.id}" title="Save track">${saved?'♥':'♡'}</button></div>
- </article>`;
+function startPlayer(){
+ if(!window.Spotify){log('Spotify SDK has not loaded. Refresh and try again.');return}
+ if(player){player.disconnect();player=null}
+ player=new Spotify.Player({name:'Soundify Web Player',getOAuthToken:tokenForSdk,volume:Number($('volume').value)/100});
+ player.addListener('ready',({device_id})=>{
+  deviceId=device_id;setStatus('Soundify device ready ✓');$('deviceTitle').textContent='Soundify Web Player is ready';$('deviceText').textContent='Choose it from Spotify Connect';enableControls(true);log('Connected. Open Spotify on another device and select Soundify Web Player in the device picker.');
+ });
+ player.addListener('not_ready',({device_id})=>{if(device_id===deviceId){deviceId=null;setStatus('Device offline');enableControls(false);log('The Spotify Connect device went offline.')}});
+ player.addListener('player_state_changed',state=>{
+  if(!state)return;
+  const t=state.track_window.current_track;
+  $('track').textContent=t?.name||'Nothing playing';
+  $('artist').textContent=t?.artists?.map(a=>a.name).join(', ')||'Transfer playback from Spotify';
+  if(t?.album?.images?.[0]?.url)$('cover').src=t.album.images[0].url;
+  $('toggle').textContent=state.paused?'▶ Play':'Ⅱ Pause';
+ });
+ player.addListener('initialization_error',({message})=>log('Initialization error: '+message));
+ player.addListener('authentication_error',({message})=>{log('Authentication error: '+message);setStatus('Authentication failed')});
+ player.addListener('account_error',({message})=>{log('Spotify account error: '+message+' The Web Playback SDK requires Spotify Premium for streaming.');setStatus('Account not eligible')});
+ player.addListener('playback_error',({message})=>log('Playback error: '+message));
+ player.connect().then(ok=>{if(!ok)log('Spotify player could not connect. Check your Client ID, redirect URI and browser console.')});
 }
-function renderTracks(tracks,target){
- const el=$(target);if(!tracks.length){el.innerHTML='<div class="empty">No tracks found. Try another search.</div>';return}
- el.innerHTML=tracks.map(trackCard).join('');
- el.querySelectorAll('[data-play]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const t=tracks.find(x=>x.id===b.dataset.play);play(t)}));
- el.querySelectorAll('[data-save]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();toggleFavorite(tracks.find(x=>x.id===b.dataset.save))}));
- el.querySelectorAll('.track').forEach(card=>card.addEventListener('dblclick',()=>{const t=tracks.find(x=>x.id===card.dataset.id);play(t)}));
-}
-function play(t){
- if(!t)return;
- $('nowTitle').textContent=t.name;$('nowArtist').textContent=t.artists.map(a=>a.name).join(', ');
- const img=t.album.images?.[0]?.url||'';$('nowCover').src=img;$('nowCover').style.display=img?'block':'none';
- $('spotifyPlayer').src='https://open.spotify.com/embed/track/'+encodeURIComponent(t.id)+'?utm_source=generator&theme=0';
-}
-function toggleFavorite(t){
- if(!t)return;
- const i=favorites.findIndex(x=>x.id===t.id);
- if(i>=0)favorites.splice(i,1);else favorites.unshift(t);
- localStorage.setItem('sf_favorites',JSON.stringify(favorites));renderTracks(favorites,'favorites');
- // Refresh current search cards so heart state updates.
- const cards=[...document.querySelectorAll('#results .track')];
- cards.forEach(c=>{const b=c.querySelector('[data-save]');if(b&&b.dataset.save===t.id){const on=favorites.some(x=>x.id===t.id);b.textContent=on?'♥':'♡';b.classList.toggle('saved',on)}});
-}
-$('searchBtn').addEventListener('click',search);
-$('query').addEventListener('keydown',e=>{if(e.key==='Enter')search()});
-$('connectBtn').addEventListener('click',connect);
-if(token)setStatus('Spotify session found • ready');
-renderTracks(favorites,'favorites');
-handleCallback();
+$('connect').addEventListener('click',beginLogin);
+$('toggle').addEventListener('click',()=>player?.togglePlay());
+$('next').addEventListener('click',()=>player?.nextTrack());
+$('previous').addEventListener('click',()=>player?.previousTrack());
+$('disconnect').addEventListener('click',()=>{player?.disconnect();player=null;deviceId=null;enableControls(false);setStatus('Disconnected');$('deviceTitle').textContent='Disconnected';$('deviceText').textContent='Connect again to use Soundify.';log('Disconnected from Spotify.')});
+$('volume').addEventListener('input',e=>player?.setVolume(Number(e.target.value)/100));
+window.onSpotifyWebPlaybackSDKReady=()=>{if(sessionStorage.getItem('sf_access_token')){accessToken=sessionStorage.getItem('sf_access_token');startPlayer()}};
+exchangeCode();
 </script>
 </body>
 </html>
